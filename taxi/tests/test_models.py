@@ -1,4 +1,3 @@
-
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -44,7 +43,8 @@ class ModelsTests(TestCase):
     def test_driver_str(self):
         self.assertEqual(
             str(self.driver),
-            f"{self.driver.username} ({self.driver.first_name} {self.driver.last_name})",
+            f"{self.driver.username} "
+            f"({self.driver.first_name} {self.driver.last_name})",
         )
 
     def test_create_driver_with_license_number(self):
@@ -52,9 +52,11 @@ class ModelsTests(TestCase):
         self.assertEqual(self.driver.license_number, self.license_number)
         self.assertTrue(self.driver.check_password(self.password))
 
-
     def test_driver_get_absolute_url(self):
         driver_url = self.driver.get_absolute_url()
-        url_expected = reverse("taxi:driver-detail", kwargs={"pk": self.driver.pk})
+        url_expected = reverse(
+            "taxi:driver-detail",
+            kwargs={"pk": self.driver.pk},
+        )
 
         self.assertEqual(url_expected, driver_url)
