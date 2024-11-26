@@ -194,7 +194,7 @@ class CarsViewsTests(TestCase):
 
     def test_get_queryset_with_search(self):
         response = self.client.get(reverse("taxi:car-list") + "?model=Corolla")
-        driver_list = response.context["car_list"]
+        car_list = response.context["car_list"]
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(driver_list), 1)
+        self.assertEqual(len(car_list), 1)
